@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sanity:
+    name: sanity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check out code
+        uses: actions/checkout@v4
+
+      - name: check for trailing whitespace
+        run: |
+          set -euo pipefail
+
+          if git grep -nI '[[:blank:]]$' -- .; then
+            echo "found trailing whitespace"
+            exit 1
+          fi
+
+      - name: validate workflow yaml
+        run: |
+          set -euo pipefail
+
+          ruby <<'RUBY'
+          require "psych"
+
+          Dir.glob(".github/workflows/*.{yml,yaml}").sort.each do |path|
+            Psych.parse_stream(File.read(path))
+            puts "validated #{path}"
+          end
+          RUBY
+
+      # extend this starter with repo-specific build, lint, and test jobs.
