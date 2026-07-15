@@ -1,23 +1,13 @@
-# agents
+# skills
 
-shared workflow defaults for starter repos.
+- keep each skill in `skills/<skill-name>`.
+- keep `SKILL.md` concise and put trigger conditions in its description.
+- add scripts, references, or assets only when the workflow needs them.
+- keep `agents/openai.yaml` aligned with the skill.
+- validate every changed skill with the skill creator's `quick_validate.py`.
 
-## rules
+## installing
 
-- keep changes small and focused.
-- follow existing patterns before inventing new ones.
-- prefer simple, readable code.
-- use lowercase for casual writing unless there is a clear reason not to.
-- add tests with behavior changes when code exists.
-- do not add tooling unless the repo clearly needs it.
-- do not mix unrelated cleanup into the same patch.
-
-## git and github
-
-- create a branch, push it, and open a pr for normal changes.
-- use short, specific titles.
-- use lowercase and imperative style.
-- use `<emoji> <type>(<scope>): <summary>` when scope helps, or `<emoji> <type>: <summary>` when it does not.
-- common types: `docs`, `feat`, `fix`, `refactor`, `chore`, `style`.
-- examples: `📝 docs(repo): add issue templates`, `✨ feat(chart): add line view`, `🐛 fix: handle empty input`.
-- keep unrelated changes in separate commits when practical.
+- use `python3 install.py` to link every skill for Codex and Claude.
+- keep installation idempotent and refuse to replace paths the repo does not own.
+- add or update installer tests when installation behavior changes.

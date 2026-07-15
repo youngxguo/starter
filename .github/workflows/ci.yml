@@ -32,7 +32,7 @@ jobs:
             exit 1
           fi
 
-      - name: validate workflow yaml
+      - name: validate yaml
         run: |
           set -euo pipefail
 
@@ -43,6 +43,26 @@ jobs:
             Psych.parse_stream(File.read(path))
             puts "validated #{path}"
           end
+
+          skills = Dir.glob("skills/*/SKILL.md").sort
+          abort "no skills found" if skills.empty?
+
+          skills.each do |path|
+            contents = File.read(path)
+            frontmatter = contents.match(/\A---\n(.*?)\n---\n/m)
+            abort "missing frontmatter: #{path}" unless frontmatter
+
+            metadata = Psych.safe_load(frontmatter[1])
+            directory = File.basename(File.dirname(path))
+            abort "skill name does not match directory: #{path}" unless metadata["name"] == directory
+            abort "missing skill description: #{path}" unless metadata["description"].is_a?(String) && !metadata["description"].empty?
+
+            agent = File.join(File.dirname(path), "agents", "openai.yaml")
+            abort "missing agent metadata: #{path}" unless File.file?(agent)
+            Psych.safe_load(File.read(agent))
+            puts "validated #{path}"
+          end
           RUBY
 
-      # extend this starter with repo-specific build, lint, and test jobs.
+      - name: test installer
+        run: python3 -m unittest discover -s tests

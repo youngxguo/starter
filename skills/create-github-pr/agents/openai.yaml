@@ -1,0 +1,4 @@
+interface:
+  display_name: "create github pr"
+  short_description: "create focused github pull requests"
+  default_prompt: "use $create-github-pr to review this branch and open a focused pull request that is ready for review immediately."

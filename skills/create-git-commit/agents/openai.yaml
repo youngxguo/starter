@@ -1,0 +1,4 @@
+interface:
+  display_name: "create git commit"
+  short_description: "create focused git commits safely"
+  default_prompt: "use $create-git-commit to review the current changes and create a focused commit."
