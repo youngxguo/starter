@@ -5,7 +5,7 @@ description: Review a Git branch, verify its commits and diff, push it, and open
 
 # create github pr
 
-Open one focused pull request from the current branch. Preserve unrelated changes and follow the repository's instructions and pull request template.
+Open one focused pull request from the current branch and make it ready for review immediately so automated review can pick it up. Create a draft only when the user explicitly requests one. Preserve unrelated changes and follow the repository's instructions and pull request template.
 
 ## inspect
 
@@ -50,7 +50,7 @@ Mention meaningful risks or follow-up work without inventing details. Use the re
 ## publish
 
 - Push the current branch to the appropriate remote and set its upstream when needed.
-- Open a ready pull request unless the user requests a draft or the work is explicitly incomplete.
+- Open the pull request ready for review immediately. Do not create a draft unless the user explicitly requests one.
 - Set the intended base and head explicitly when repository or remote ambiguity exists.
 - If a pull request already exists for the branch, return it instead of creating a duplicate.
 - Verify the resulting pull request's URL, title, base, head, and state.
