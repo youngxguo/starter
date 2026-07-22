@@ -10,4 +10,3 @@
 
 - distribute skills through the Skills Marketplace and its `npx skills` CLI.
 - keep `npx skills add . --list` able to discover every skill in the repository.
-- use `npx skills add youngxguo/skills --global --agent codex claude-code --skill '*' --yes` to install every skill for Codex and Claude Code.
