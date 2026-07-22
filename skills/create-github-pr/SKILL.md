@@ -5,7 +5,7 @@ description: Review a Git branch, verify its commits and diff, push it, and open
 
 # create github pr
 
-Open one focused pull request from the current branch and make it ready for review immediately so automated review can pick it up. Create a draft only when the user explicitly requests one. Preserve unrelated changes and follow the repository's instructions and pull request template.
+Open one focused pull request from the current branch and make it ready for review immediately so automated review can pick it up. Create a draft only when the user explicitly requests one.
 
 ## inspect
 
@@ -17,21 +17,14 @@ Open one focused pull request from the current branch and make it ready for revi
 
 ## prepare
 
-- Ensure all changes intended for the pull request are committed. Keep unrelated worktree changes out of the commits.
+- If intended changes are uncommitted, use `$create-git-commit` to inspect, verify, stage, and commit them. Keep unrelated worktree changes out of the pull request.
 - Run checks appropriate to the changed behavior and repository guidance.
 - Review the final diff for accidental, generated, sensitive, or unrelated content.
-- Do not bypass hooks, rewrite published history, or force-push unless explicitly requested.
+- Do not rewrite published history or force-push unless explicitly requested.
 
 ## write
 
-Follow the repository's title and body conventions. When it does not define a format, use:
-
-```text
-<emoji> <type>(<scope>): <summary>
-<emoji> <type>: <summary>
-```
-
-Use a short, specific title with lowercase, imperative wording and no trailing punctuation. Include a scope only when it adds clarity. Common types are `docs`, `feat`, `fix`, `refactor`, `chore`, and `style`.
+Follow the repository's title and body conventions. When it does not define a title format, reuse or adapt the commit title when it accurately summarizes the entire pull request. Otherwise, write a short, specific title with lowercase, imperative wording and no trailing punctuation.
 
 Write a concise body:
 
